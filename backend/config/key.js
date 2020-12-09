@@ -1,5 +1,4 @@
 module.exports = {
-    MONGO_URL: process.env.MONGO_URL ,
-    JWT_SECRET: process.env.JWT_SECRET 
+    mongo_URL: process.env.MONGO_URL ,
+    jwt_SECRET: process.env.JWT_SECRET
 } 
-

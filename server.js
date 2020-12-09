@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const userRoute = require ('./backend/routes/api/userRoute')
 
-const db = require('./backend/config/key').MONGO_URL;
+const db = require('./backend/config/key').mongo_URL;
 
 mongoose.connect(db,{
     useCreateIndex: true,

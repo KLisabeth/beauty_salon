@@ -1,6 +1,7 @@
 const express = require ("express");
+const bcrypt = require ('bcrypt');
 const User = require ('../../models/userModel');
-const { getToken } = require ('../../config/utils');
+const {getToken, isAuth, isAdmin} = require ('../../config/utils');
 
 
 const router = express.Router();
@@ -25,7 +26,7 @@ router.post('/register', async (req, res)=>{
         name: req.body.name,
         email: req.body.email,
         mobile: req.body.mobile,
-        password: req.body.password
+        password: bcrypt.hashSync(req.body.password, 8),
         
     })
     const newUser = await user.save()
@@ -42,7 +43,77 @@ router.post('/register', async (req, res)=>{
         res.status(401).send({msg: 'Invalid user data'})
     }
     
-    })
+    });
+    router.post('/signin', async (req, res)=>{
 
+        const signedinUser = await User.findOne({
+            email: req.body.email,
+          });
+          if (
+            signedinUser &&
+            bcrypt.compareSync(req.body.password, signedinUser.password)
+          ) {
+            res.send({
+                _id: signedinUser.id,
+                name: signedinUser.name,
+                email: signedinUser.email,
+                mobile: signedinUser.mobile,
+                isAdmin: signedinUser.isAdmin,
+                token: getToken(signedinUser)
+            })
+           
+        }else{
+            res.status(401).send({msg: 'Invalid email or password.'})
+        }
+        
+        });
+
+        /* admin */
+
+ router.get('/', async (req, res) => {
+      const users = await User.find({});
+      res.send(users);
+    }
+  );
+  
+ router.get('/:id',async (req, res) => {
+      const user = await User.findOne({ _id: req.params.id });
+      if (user) {
+        res.send(user);
+      } else {
+        res.status(404).send({ message: 'User Not Found.' });
+      }
+    }
+  );
+  
+  router.put('/:id', isAuth, isAdmin, async (req, res) => {
+      const userId = req.params.id;
+      const user = await User.findById(userId);
+      if (user) {
+        user.name = req.body.name;
+        user.email = req.body.email;
+        user.isAdmin = req.body.isAdmin;
+        user.isSeller = req.body.isSeller;
+        const updatedUser = await user.save();
+        if (updatedUser) {
+          return res
+            .status(200)
+            .send({ message: 'User Updated', data: updatedUser });
+        }
+      }
+      return res.status(500).send({ message: ' Error in Updating User.' });
+    }
+  );
+  
+ router.delete('/:id',isAuth,isAdmin, async (req, res) => {
+      const deletedUser = await User.findById(req.params.id);
+      if (deletedUser) {
+        await deletedUser.remove();
+        res.send({ message: 'User Deleted' });
+      } else {
+        res.send('Error in Deletion.');
+      }
+    }
+  );
 
 module.exports = router;

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import Home from './screens/Layout';
+import Home from './screens/Home';
 import About from './screens/About';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';

@@ -173,9 +173,12 @@ b {
 }
 .basket {
   font-size: 2em;
-  color: #f66;
   cursor: pointer;
-  margin: 1rem 2rem 5rem 0;
+  margin-left: 1rem;
+}
+.medium{
+  font-size: 1.5em;
+  
 }
 
 .basket:hover {
@@ -200,8 +203,8 @@ b {
   flex-direction: column;
   border: 0.1rem solid #858585;
   border-radius: 0.5rem;
-  margin: 2rem 0rem 4rem 0rem;
-  padding: 3rem;
+  margin: 5rem 0rem 3rem 0rem;
+  padding: 5rem;
 }
 .form-control {
   max-width: 100%;
@@ -292,8 +295,27 @@ b {
   text-align: center;
   color: #575555;
 }
+/*Checkout steps*/
+.checkout-steps{
+  display: flex;
+  justify-content: space-between;
+  width: 40rem;
+  margin: 2rem auto;
+}
+.checkout-steps > div{
+  border-top: .3rem #c0c0c0 solid;
+  font-style: italic;
+  font-family: "Playfair Display";
+  font-weight: 400;
+  color: #5c5252;
+  flex: 1,1;
+}
+.checkout-steps > div.active{
+  border-top: .3rem #f35ece solid;
+  color: #830764;
+}
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 480px) {
   h3,
   h5,
   h4,

@@ -3,7 +3,14 @@ const mongoose= require ('mongoose');
 const bodyParser = require ('body-parser');
 require('dotenv').config();
 
-const userRoute = require ('./backend/routes/api/userRoute')
+const user = require ('./backend/routes/api/user')
+
+const slot = require ('./backend/routes/api/slot')
+const appointment = require ('./backend/routes/api/appointments')
+
+const service = require ('./backend/routes/api/service')
+const category = require ('./backend/routes/api/service')
+
 
 const db = require('./backend/config/key').mongo_URL;
 
@@ -21,8 +28,11 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use('/api/users', userRoute);
-
+app.use('/api/users', user);
+app.use('/api/slots', slot);
+app.use('/api/appointments', appointment );
+app.use('/api/service', service );
+app.use('/api/categories', category)
 
 
 const port = process.env.PORT || 5000;

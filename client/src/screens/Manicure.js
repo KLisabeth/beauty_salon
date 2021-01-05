@@ -1,17 +1,11 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Row, Col} from 'react-bootstrap';
-import hands from '../assets/images/hands.jpg'
-function About() {
+import n7 from '../assets/images/n9.jpg';
+
+function Manicure() {
     return (
-<div className="about-page">
-    <h1 className="m-2">About us</h1>
-    <h6>Dear clients! We are thrilled to invite you to Pretty Woman beauty salon in Brussel that was created especially to serve you!
-     We’ve opened our doors for business in 2014 and have been serving
-     clients from all over the world since then. Our experienced team offers 
-     a wide variety of salon services and our goal is to make each and every client
-     feel at home!
-    </h6>
+<div className="manicure-page">
 <Container>
 <h2>Tips for Correcting Common Nail Concerns</h2>
   <Row>
@@ -20,8 +14,8 @@ function About() {
     </Col>
     <Col sm={4}> <img
     className="handsImg mr-3"
-    src={hands}
-    alt="hands"
+    src={n7}
+    alt="manicure"
   /></Col>
   </Row>
 </Container>
@@ -47,8 +41,9 @@ function About() {
      It also prevents clients from having chiclet- looking nails.” 
     </h6>
     <p className="m-4 p-2"></p>
-</div>
+           
+        </div>
     )
 }
 
-export default About
+export default Manicure
